@@ -5,7 +5,7 @@ require APPPATH.'/libraries/REST_Controller.php';
 
 use Restserver\Libraries\REST_Controller;
 
-class Pessoa extends REST_Controller
+class Livro extends REST_Controller
 {
     public function __construct()
     {
@@ -17,11 +17,11 @@ class Pessoa extends REST_Controller
     {
         if(!empty($id))
         {
-            $data = $this->db->get_where('tb_pessoa',['cd_pessoa'=>$id])->row_array();
+            $data = $this->db->get_where('tb_livro',['cd_livro'=>$id])->row_array();
         }
         else
         {
-            $data = $this->db->get("tb_pessoa")->result();
+            $data = $this->db->get("tb_livro")->result();
         }
    
         $this->response($data, REST_Controller::HTTP_OK);
@@ -30,20 +30,20 @@ class Pessoa extends REST_Controller
     public function index_post()
     {
         $input = $this->input->post();
-        $this->db->insert('tb_pessoa',$input);
-        $this->response("Registro feito com sucesso", REST_Controller::HTTP_OK);
+        $this->db->insert('tb_livro',$input);
+        $this->response("Livro adicionado com sucesso", REST_Controller::HTTP_OK);
     }
 
     public function index_put($id)
     {
         $input = $this->put();
-        $this->db->update('tb_pessoa',$input, array('cd_pessoa'=>$id));
-        $this->response(['Registro alterado com sucesso'], REST_Controller::HTTP_OK);
+        $this->db->update('tb_livro',$input, array('cd_livro'=>$id));
+        $this->response(['Registro do livro editado com sucesso'], REST_Controller::HTTP_OK);
     }
 
     public function index_delete($id)
     {
-        $this->db->delete('tb_pessoa', array('cd_pessoa'=>$id));
-        $this->response(['Registro Deletado com sucesso'], REST_Controller::HTTP_OK);
+        $this->db->delete('tb_livro', array('cd_livro'=>$id));
+        $this->response(['Registro do livro deletado com sucesso'], REST_Controller::HTTP_OK);
     }
 }
